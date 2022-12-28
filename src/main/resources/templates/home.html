@@ -30,17 +30,28 @@
                         <input type="number" class="form-control" id="solID" th:field="*{sol}" th:value="*{sol}">
                     </div>
                 </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-3">Confirm</button>
+
+            </div>
+
+            <div class="row mb-3">
+                <div class="form-check col-4" th:each="camera : ${listMarsCamera}">
+                    <input class="form-check-input" type="checkbox" th:field="*{cameras}" th:value="${camera.name}" th:id="${camera.name}">
+                    <label class="form-check-label" th:for="${camera.name}">
+                       [[${camera.name}]]: [[${camera.fullName}]]
+                    </label>
                 </div>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Confirm</button>
             </div>
         </form>
 
+        <div class="bg-success p-2 text-dark bg-opacity-50 text-center" th:if="${message != null}"> <p class="fs-4">[[${message}]]</p> </div>
 
         <div class="row">
             <th:block th:each="photo : ${roverData}">
                 <div class="col-4">
-                    <img class="img-fluid img-thumbnail" th:src="${photo.imgSrc}">
+                    <img class="img-fluid img-thumbnail" th:src="${photo.imgSrc}" width="400px">
                 </div>
             </th:block>
         </div>
